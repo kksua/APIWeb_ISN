@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SiteWeb_ISN", "SiteWeb_ISN\SiteWeb_ISN.csproj", "{029BB31D-71F5-421C-B438-9712DE6FFA9F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIWeb_ISN", "SiteWeb_ISN\APIWeb_ISN.csproj", "{029BB31D-71F5-421C-B438-9712DE6FFA9F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

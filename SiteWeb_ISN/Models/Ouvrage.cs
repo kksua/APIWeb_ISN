@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SiteWeb_ISN.Models
+namespace APIWeb_ISN.Models
 {
     public class Ouvrage
     {
