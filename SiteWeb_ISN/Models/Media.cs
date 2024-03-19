@@ -3,7 +3,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations;
 
-namespace SiteWeb_ISN.Models;
+namespace APIWeb_ISN.Models;
 public class Media
 {
     private DateTime DateDeSortie1;

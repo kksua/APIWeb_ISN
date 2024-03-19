@@ -5,18 +5,18 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using SiteWeb_ISN.Data;
-using SiteWeb_ISN.Models;
+using APIWeb_ISN.Data;
+using APIWeb_ISN.Models;
 
-namespace SiteWeb_ISN.Controllers
+namespace APIWeb_ISN.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class OuvragesController : ControllerBase
     {
-        private readonly SiteWeb_ISNContext _context;
+        private readonly APIWeb_ISNContext _context;
 
-        public OuvragesController(SiteWeb_ISNContext context)
+        public OuvragesController(APIWeb_ISNContext context)
         {
             _context = context;
         }
@@ -88,7 +88,7 @@ namespace SiteWeb_ISN.Controllers
         {
           if (_context.Ouvrage == null)
           {
-              return Problem("Entity set 'SiteWeb_ISNContext.Ouvrage'  is null.");
+              return Problem("Entity set 'APIWeb_ISNContext.Ouvrage'  is null.");
           }
             _context.Ouvrage.Add(ouvrage);
             await _context.SaveChangesAsync();

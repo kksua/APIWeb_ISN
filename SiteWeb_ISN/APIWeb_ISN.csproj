@@ -7,7 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+<<<<<<< HEAD:SiteWeb_ISN/SiteWeb_ISN.csproj
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.28" />
+=======
+>>>>>>> 9f47be36f31e69da7381c93ac13711ffe9898194:SiteWeb_ISN/APIWeb_ISN.csproj
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.28" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.28">
       <PrivateAssets>all</PrivateAssets>

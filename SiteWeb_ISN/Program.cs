@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using SiteWeb_ISN.Data;
+using APIWeb_ISN.Data;
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<SiteWeb_ISNContext>(options =>
+builder.Services.AddDbContext<APIWeb_ISNContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("SiteWeb_ISNContext") ?? throw new InvalidOperationException("Connection string 'SiteWeb_ISNContext' not found.")));
 
 // Add services to the container.
@@ -31,7 +31,11 @@ app.MapControllers();
 #pragma warning disable CS8602//Dereferencement d'une eventuelle reference n
 using (var serviceScope = app.Services.GetService<IServiceScopeFactory>().CreateScope())
 {
+<<<<<<< HEAD
     var context = serviceScope.ServiceProvider.GetRequiredService<SiteWeb_ISNContext>();
+=======
+    var context = serviceScope.ServiceProvider.GetRequiredService<APIWeb_ISNContext>();
+>>>>>>> 9f47be36f31e69da7381c93ac13711ffe9898194
     context.Database.EnsureDeleted();
     context.Database.EnsureCreated();
 }
