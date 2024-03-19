@@ -30,11 +30,11 @@ app.MapControllers();
 //ajout pour creation bdd
 #pragma warning disable CS8602//Dereferencement d'une eventuelle reference n
 using (var serviceScope = app.Services.GetService<IServiceScopeFactory>().CreateScope())
-#pragma warning disable CS8602//Dereferencement d'une eventuelle reference n
 {
-    var context = serviceScope.ServiceProvider.GetRequiredService<ISN_First_2024Context>();
+    var context = serviceScope.ServiceProvider.GetRequiredService<SiteWeb_ISNContext>();
     context.Database.EnsureDeleted();
     context.Database.EnsureCreated();
 }
+#pragma warning restore CS8602//Dereferencement d'une eventuelle reference n
 
 app.Run();
