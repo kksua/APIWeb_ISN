@@ -31,11 +31,7 @@ app.MapControllers();
 #pragma warning disable CS8602//Dereferencement d'une eventuelle reference n
 using (var serviceScope = app.Services.GetService<IServiceScopeFactory>().CreateScope())
 {
-<<<<<<< HEAD
-    var context = serviceScope.ServiceProvider.GetRequiredService<SiteWeb_ISNContext>();
-=======
     var context = serviceScope.ServiceProvider.GetRequiredService<APIWeb_ISNContext>();
->>>>>>> 9f47be36f31e69da7381c93ac13711ffe9898194
     context.Database.EnsureDeleted();
     context.Database.EnsureCreated();
 }
