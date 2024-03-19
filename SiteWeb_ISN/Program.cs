@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using APIWeb_ISN.Data;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<APIWeb_ISNContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("SiteWeb_ISNContext") ?? throw new InvalidOperationException("Connection string 'SiteWeb_ISNContext' not found.")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("APIWeb_ISNContext") ?? throw new InvalidOperationException("Connection string 'APIWeb_ISNContext' not found.")));
 
 // Add services to the container.
 
