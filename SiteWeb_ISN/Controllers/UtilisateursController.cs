@@ -5,18 +5,18 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using SiteWeb_ISN.Data;
-using SiteWeb_ISN.Models;
+using APIWeb_ISN.Data;
+using APIWeb_ISN.Models;
 
-namespace SiteWeb_ISN.Controllers
+namespace APIWeb_ISN.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class UtilisateursController : ControllerBase
     {
-        private readonly SiteWeb_ISNContext _context;
+        private readonly APIWeb_ISNContext _context;
 
-        public UtilisateursController(SiteWeb_ISNContext context)
+        public UtilisateursController(APIWeb_ISNContext context)
         {
             _context = context;
         }
@@ -88,7 +88,7 @@ namespace SiteWeb_ISN.Controllers
         {
           if (_context.Utilisateur == null)
           {
-              return Problem("Entity set 'SiteWeb_ISNContext.Utilisateur'  is null.");
+              return Problem("Entity set 'APIWeb_ISNContext.Utilisateur'  is null.");
           }
             _context.Utilisateur.Add(utilisateur);
             await _context.SaveChangesAsync();

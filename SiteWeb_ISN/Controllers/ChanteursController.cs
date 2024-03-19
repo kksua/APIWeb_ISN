@@ -5,18 +5,18 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using SiteWeb_ISN.Data;
-using SiteWeb_ISN.Models;
+using APIWeb_ISN.Data;
+using APIWeb_ISN.Models;
 
-namespace SiteWeb_ISN.Controllers
+namespace APIWeb_ISN.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class ChanteursController : ControllerBase
     {
-        private readonly SiteWeb_ISNContext _context;
+        private readonly APIWeb_ISNContext _context;
 
-        public ChanteursController(SiteWeb_ISNContext context)
+        public ChanteursController(APIWeb_ISNContext context)
         {
             _context = context;
         }
@@ -88,7 +88,7 @@ namespace SiteWeb_ISN.Controllers
         {
           if (_context.Chanteur == null)
           {
-              return Problem("Entity set 'SiteWeb_ISNContext.Chanteur'  is null.");
+              return Problem("Entity set 'APIWeb_ISNContext.Chanteur'  is null.");
           }
             _context.Chanteur.Add(chanteur);
             await _context.SaveChangesAsync();
