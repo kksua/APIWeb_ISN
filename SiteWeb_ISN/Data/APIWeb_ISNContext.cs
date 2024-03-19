@@ -23,5 +23,17 @@ namespace APIWeb_ISN.Data
         public DbSet<APIWeb_ISN.Models.Ouvrage>? Ouvrage { get; set; }
 
         public DbSet<APIWeb_ISN.Models.Utilisateur>? Utilisateur { get; set; }
+
+        public DbSet<APIWeb_ISN.Models.Acteur>? Acteur { get; set; }
+
+        public DbSet<APIWeb_ISN.Models.Directeurs>? Directeurs { get; set; }
+
+        public DbSet<APIWeb_ISN.Models.Media>? Media { get; set; }
+
+        public DbSet<APIWeb_ISN.Models.Movies>? Movies { get; set; }
+
+        public DbSet<APIWeb_ISN.Models.Series>? Series { get; set; }
+
+        public DbSet<APIWeb_ISN.Models.FavoriteMedia>? FavoriteMedia { get; set; }
     }
 }
