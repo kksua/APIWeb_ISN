@@ -15,9 +15,9 @@ public class SiteWeb_ISN
 
         public string description { get; set; } = string.Empty;
 
-    public DateTime dateDeSortie { get => dateDeSortie1; set => dateDeSortie1 = value; }
+        public DateTime dateDeSortie { get => dateDeSortie1; set => dateDeSortie1 = value; }
 
-    public string lien { get; set; } = string.Empty;
+        public string lien { get; set; } = string.Empty;
 
 
 }
