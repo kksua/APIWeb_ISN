@@ -1,18 +1,14 @@
-﻿
-public class SiteWeb_ISN
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SiteWeb_ISN.Models;
+public class Acteur
 {
+    [Key]
+    public int IdActeur { get; set; }
 
+    public string? NomActeur { get; set; }
 
-    public Acteurs()
-    {
+    public string NationaliteActeur { get; set; } = string.Empty;
 
-    public int idActeur { get; set; }
-
-    public string nomActeur { get; set; }
-
-    public string nationaliteActeur { get; set; } = string.Empty;
-
-    public BLOB imageActeur { get; set; } = BLOB.Empty;
-
-}
+    public string? ImageActeur { get; set; } = string.Empty;
 }

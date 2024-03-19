@@ -25,6 +25,16 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
+
 app.MapControllers();
+//ajout pour creation bdd
+#pragma warning disable CS8602//Dereferencement d'une eventuelle reference n
+using (var serviceScope = app.Services.GetService<IServiceScopeFactory>().CreateScope())
+#pragma warning disable CS8602//Dereferencement d'une eventuelle reference n
+{
+    var context = serviceScope.ServiceProvider.GetRequiredService<ISN_First_2024Context>();
+    context.Database.EnsureDeleted();
+    context.Database.EnsureCreated();
+}
 
 app.Run();

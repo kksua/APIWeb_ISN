@@ -1,18 +1,17 @@
-﻿
-public class SiteWeb_ISN
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SiteWeb_ISN.Models;
+public class Series
 {
 
+    [Key]
+   
+    public int IdSeries { get; set; }
 
-    public Series()
-    {
+    public string NomSerie { get; set; } = string.Empty;
 
-    public int idSeries { get; set; }
 
-    public string nomSerie { get; set; }
+    public int NmbreSeasons { get; set; } 
 
-    public int nmbreSeasons { get; set; } = int.Empty;
-
-    public int nmbreEpisode { get; set; } = int.Empty;
-
-}
+    public int NmbreEpisode { get; set; } 
 }

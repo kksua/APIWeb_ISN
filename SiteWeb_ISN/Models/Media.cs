@@ -1,24 +1,28 @@
 ﻿
 
-public class SiteWeb_ISN
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
+
+namespace SiteWeb_ISN.Models;
+public class Media
 {
-    private DateTime dateDeSortie1;
+    private DateTime DateDeSortie1;
 
-    public Models()
-	{
 
-        public int idMedia { get; set; }
+    [Key]
+    public int IdMedia { get; set; }
         
-        public string title { get; set; } 
-        
-        public string genre { get; set; } = string.Empty;
-
-        public string description { get; set; } = string.Empty;
-
-        public DateTime dateDeSortie { get => dateDeSortie1; set => dateDeSortie1 = value; }
-
-        public string lien { get; set; } = string.Empty;
+    public string Title { get; set; } = string.Empty;
 
 
-}
+    public string Genre { get; set; } = string.Empty;
+
+    public string Description { get; set; } = string.Empty;
+
+    public DateTime DateDeSortie { get => DateDeSortie1; set => DateDeSortie1 = value; }
+
+    public string Lien { get; set; } = string.Empty;
+
+
+
 }

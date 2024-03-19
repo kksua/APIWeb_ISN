@@ -1,16 +1,26 @@
-﻿
-public class SiteWeb_ISN
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace SiteWeb_ISN.Models;
+public class FavoriteMedia
 {
 
 
-    public FavoriteMedia()
-    {
+    [Key]
+    public int Id { get; set; }
 
-    public ICollection<idFilm>? idFilms { get; set; }
- 
-    public ICollection<idUtilisateur>? idUtilisateurs { get; set; }
+    [Required]
+    public int IdFilm { get; set; }
+    [Required]
+    public int IdUtilisateur { get; set; } 
 
-    public boolean favoriteMedia { get; set; }
+    [ForeignKey("IdFilm")]
+    public Movies Movies { get; set; }
 
-}
+    [ForeignKey("IdUtilisateur")]
+    public Utilisateur Utilisateur { get; set; }
+
+    public bool FavoriteMedias { get; set; }
+
+
 }

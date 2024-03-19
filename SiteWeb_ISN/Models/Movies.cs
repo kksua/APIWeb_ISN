@@ -1,18 +1,18 @@
-﻿
-public class SiteWeb_ISN
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SiteWeb_ISN.Models;
+public class Movies
 {
-   
 
-    public Movies()
-    {
+    [Key]
 
-    public int idFilm { get; set; }
+    public int IdFilm { get; set; }
 
-    public string nomFilm { get; set; }
+    public string NomFilm { get; set; }=string.Empty;
 
-    public time duree { get; set; } 
+    public TimeSpan Duree { get; set; } 
 
 
 
-}
+
 }
