@@ -1,0 +1,9 @@
+CREATE TABLE [dbo].[Acteur] (
+    [IdActeur]          INT            IDENTITY (1, 1) NOT NULL,
+    [NomActeur]         NVARCHAR (MAX) NULL,
+    [NationaliteActeur] NVARCHAR (MAX) NOT NULL,
+    [ImageActeur]       NVARCHAR (MAX) NULL,
+    CONSTRAINT [PK_Acteur] PRIMARY KEY CLUSTERED ([IdActeur] ASC)
+);
+
+1，Anne Hathaway，美国，https://img1.baidu.com/it/u=3886090859,1439740581&fm=253&fmt=auto&app=138&f=JPEG?w=440&h=553
