@@ -23,6 +23,26 @@ namespace Web_HP.Controllers
             return View();
         }
 
+        public IActionResult Albums()
+        {
+            return View();
+        }
+
+        public IActionResult Chansons()
+        {
+            return View();
+        }
+
+        public IActionResult Chanteurs()
+        {
+            return View();
+        }
+
+        public IActionResult Movies()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
