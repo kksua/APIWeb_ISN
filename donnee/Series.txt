@@ -1,0 +1,7 @@
+CREATE TABLE [dbo].[Series] (
+    [IdSeries]     INT            IDENTITY (1, 1) NOT NULL,
+    [NomSerie]     NVARCHAR (MAX) NOT NULL,
+    [NmbreSeasons] INT            NOT NULL,
+    [NmbreEpisode] INT            NOT NULL,
+    CONSTRAINT [PK_Series] PRIMARY KEY CLUSTERED ([IdSeries] ASC)
+);
