@@ -11,10 +11,8 @@
   "profiles": {
     "SiteWeb_ISN": {
       "commandName": "Project",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "applicationUrl": "https://localhost:7084;http://localhost:5084",
+      "hotReloadEnabled": false,
+      "applicationUrl": "http://localhost:5084",
       "dotnetRunMessages": true
     },
     "IIS Express": {
