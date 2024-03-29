@@ -5,4 +5,4 @@ CREATE TABLE [dbo].[Movies] (
     CONSTRAINT [PK_Movies] PRIMARY KEY CLUSTERED ([IdFilm] ASC)
 );
 
-1，星际穿越，169 分钟
+1，Interstellar, 169 minutes
