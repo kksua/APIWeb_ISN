@@ -5,3 +5,5 @@ CREATE TABLE [dbo].[Series] (
     [NmbreEpisode] INT            NOT NULL,
     CONSTRAINT [PK_Series] PRIMARY KEY CLUSTERED ([IdSeries] ASC)
 );
+
+1,Nirvana in Fire,2,54,
