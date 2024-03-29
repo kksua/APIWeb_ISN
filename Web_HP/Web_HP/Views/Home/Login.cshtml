@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewData["Title"] = "Login";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Login</title>
+</head>
+<body>
+    <h2>Login</h2>
+    <form id="loginForm">
+        <label for="username">Nom d'utilisateur':</label><br />
+        <input type="text" id="username" name="username"><br />
+        <label for="password">Password:</label><br />
+        <input type="password" id="password" name="password"><br />
+        <input type="submit" value="Login">
+    </form>
+
+    <div id="message"></div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#loginForm').submit(function (event) {
+                event.preventDefault();
+
+                var formData = {
+                    username: $('#username').val(),
+                    password: $('#password').val()
+                };
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/login', // API endpoint
+                    data: JSON.stringify(formData),
+                    contentType: 'application/json',
+                    success: function (data) {
+                        // Login successful
+                        $('#message').text('Login successful. Welcome, ' + data.Username);
+                        // Redirect or do something else after successful login
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        // Login failed
+                        $('#message').text('Login failed: ' + xhr.responseJSON.Message);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
+
