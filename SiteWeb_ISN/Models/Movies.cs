@@ -13,6 +13,7 @@ public class Movies
     public TimeSpan Duree { get; set; } 
 
     public string image { get; set; }=string.Empty;
+    public string description { get; set; }=string.Empty;
 
 
 }
