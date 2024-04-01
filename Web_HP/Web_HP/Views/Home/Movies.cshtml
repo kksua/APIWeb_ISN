@@ -1,54 +1,35 @@
-﻿@{
-    ViewData["Title"] = "Movies";
+﻿
+
+
+<div class="container">
+    <h2>Movies</h2>
+    <div class="row">
+        @if (Model.MoviesList != null)
+{
+    foreach (var movie in Model.MoviesList)
+    {
+        // 渲染电影详情
+    }
+}
+else
+{
+    <p>没有可用的电影</p>
 }
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Movies</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-</head>
-<body>
+        @foreach (var movie in Model.MoviesList)
+        {
 
-<div class="container mt-3">
-    <h2>Movies</h2>
-    <div class="row" id="movies-container"></div>
-</div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script>
-    $(document).ready(function() {
-        // Make HTTP request to API endpoint
-        $.get("https://your-api-url/movies", function(data) {
-            // Iterate through movie data and render in cards
-            data.forEach(function(movie) {
-                var movieCard = `
-                <div class="col-sm-4">
-                    <div class="card" style="width: 100%;">
-                        <img class="card-img-top" src="${movie.image}" alt="${movie.title}" style="width:100%">
-                        <div class="card-body">
-                            <h4 class="card-title">${movie.title}</h4>
-                            <p class="card-text">Director: <span id="director-${movie.id}">Loading...</span></p>
-                            <p class="card-text">Year: ${movie.year}</p>
-                            <p class="card-text">Genre: ${movie.genre}</p>
-                            <a href="#" class="btn btn-primary">See Details</a>
-                        </div>
+            <div class="col-sm-4">
+                <div class="card">
+                    <img class="card-img-top" src="@movie.Image" alt="@movie.NomFilm">
+                    <div class="card-body">
+                        <h5 class="card-title">@movie.NomFilm</h5>
+                        <p class="card-text">@movie.Description</p>
+                        <p class="card-text">Duration: @movie.Duree</p>
                     </div>
-                </div>`;
-                $("#movies-container").append(movieCard);
-
-                // Make additional request to get director information
-                $.get(`https://your-api-url/movies/${movie.id}/directors`, function(directorData) {
-                    // Assuming directorData contains an array of directors
-                    var directors = directorData.map(director => director.nomDirecteur).join(", ");
-                    $("#director-" + movie.id).text(directors);
-                });
-            });
-        });
-    });
-</script>
-
-</body>
-</html>
+                </div>
+            </div>
+        }
+    </div>
+</div>
