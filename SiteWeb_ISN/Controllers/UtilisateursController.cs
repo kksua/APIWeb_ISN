@@ -120,5 +120,20 @@ namespace APIWeb_ISN.Controllers
         {
             return (_context.Utilisateur?.Any(e => e.IdUtilisateur == id)).GetValueOrDefault();
         }
+
+        // POST: api/Utilisateur/Register
+        [HttpPost("Register")]
+        public async Task<ActionResult<Utilisateur>> Register(Utilisateur utilisateur)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            _context.Utilisateur.Add(utilisateur);
+            await _context.SaveChangesAsync();
+
+            return Ok(utilisateur);
+        }
     }
 }

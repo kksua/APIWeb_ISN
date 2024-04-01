@@ -9,7 +9,7 @@
 
 <html>
 <head>
-    <title>Login</title>
+    <title>Register</title>
     <style>
         .custom-container {
             background-color: #2a9d8f; /* Set background color to teal */
@@ -38,18 +38,18 @@
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
                 <div class="custom-container">
-                    <form action="/action_page.php">
+                    <form id="registerForm">
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="inputGroup-sizing-default">Nom utilisateur</span>
-                            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                            <input type="text" class="form-control" id="NomUtilisateur" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="inputGroup-sizing-default">Adresse mail</span>
-                            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                            <input type="text" class="form-control" id="Email" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="inputGroup-sizing-default">Mot de passe</span>
-                            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                            <input type="text" class="form-control" id="MotDePasse" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                         </div>
                         <div class="create-account-text">
                             Si vous avez déjà un compte, <a href="Login">cliquer ici</a>.
@@ -66,27 +66,28 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function () {
-            $('#loginForm').submit(function (event) {
+            $('#registerForm').submit(function (event) {
                 event.preventDefault();
 
                 var formData = {
-                    username: $('#username').val(),
-                    password: $('#password').val()
+                    NomUser: $('#NomUtilisateur').val(),
+                    Email: $('#Email').val(),
+                    MDP: $('#MotDePasse').val()
                 };
 
                 $.ajax({
                     type: 'POST',
-                    url: '/api/login', // API endpoint
+                    url: '/api/Utilisateur/Register', // API endpoint
                     data: JSON.stringify(formData),
                     contentType: 'application/json',
                     success: function (data) {
-                        // Login successful
-                        $('#message').text('Login successful. Welcome, ' + data.Username);
-                        // Redirect or do something else after successful login
+                        // Inscription réussie
+                        $('#message').text('Inscription réussie. Bienvenue, ' + data.NomUser);
+                        window.location.href = '/Home/Index';
                     },
                     error: function (xhr, textStatus, errorThrown) {
-                        // Login failed
-                        $('#message').text('Login failed: ' + xhr.responseJSON.Message);
+                        // Inscription échouée:
+                        $('#message').text('Inscription échouée: ' + xhr.responseJSON.Message);
                     }
                 });
             });

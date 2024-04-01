@@ -32,8 +32,8 @@ app.MapControllers();
 using (var serviceScope = app.Services.GetService<IServiceScopeFactory>().CreateScope())
 {
     var context = serviceScope.ServiceProvider.GetRequiredService<APIWeb_ISNContext>();
-    context.Database.EnsureDeleted();
-    context.Database.EnsureCreated();
+  //  context.Database.EnsureDeleted();
+  //  context.Database.EnsureCreated();
 }
 #pragma warning restore CS8602//Dereferencement d'une eventuelle reference n
 
