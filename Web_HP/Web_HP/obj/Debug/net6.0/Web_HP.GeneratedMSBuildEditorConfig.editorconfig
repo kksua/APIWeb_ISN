@@ -1,0 +1,95 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = Web_HP
+build_property.RootNamespace = Web_HP
+build_property.ProjectDir = C:\Users\Oceane\Source\Repos\APIWeb_ISN\Web_HP\Web_HP\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\Oceane\Source\Repos\APIWeb_ISN\Web_HP\Web_HP
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/Oceane/Source/Repos/APIWeb_ISN/Web_HP/Web_HP/pages/Acteur/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = cGFnZXNcQWN0ZXVyXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Oceane/Source/Repos/APIWeb_ISN/Web_HP/Web_HP/pages/Acteur/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = cGFnZXNcQWN0ZXVyXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Oceane/Source/Repos/APIWeb_ISN/Web_HP/Web_HP/pages/Acteur/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = cGFnZXNcQWN0ZXVyXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Oceane/Source/Repos/APIWeb_ISN/Web_HP/Web_HP/pages/Acteur/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = cGFnZXNcQWN0ZXVyXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Oceane/Source/Repos/APIWeb_ISN/Web_HP/Web_HP/pages/Acteur/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = cGFnZXNcQWN0ZXVyXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Oceane/Source/Repos/APIWeb_ISN/Web_HP/Web_HP/pages/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = cGFnZXNcX1ZhbGlkYXRpb25TY3JpcHRzUGFydGlhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Oceane/Source/Repos/APIWeb_ISN/Web_HP/Web_HP/Views/Home/Albums.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBbGJ1bXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Oceane/Source/Repos/APIWeb_ISN/Web_HP/Web_HP/Views/Home/Chansons.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDaGFuc29ucy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Oceane/Source/Repos/APIWeb_ISN/Web_HP/Web_HP/Views/Home/Chanteurs.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDaGFudGV1cnMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Oceane/Source/Repos/APIWeb_ISN/Web_HP/Web_HP/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Oceane/Source/Repos/APIWeb_ISN/Web_HP/Web_HP/Views/Home/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Oceane/Source/Repos/APIWeb_ISN/Web_HP/Web_HP/Views/Home/Movies.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxNb3ZpZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Oceane/Source/Repos/APIWeb_ISN/Web_HP/Web_HP/Views/Home/Musique.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxNdXNpcXVlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Oceane/Source/Repos/APIWeb_ISN/Web_HP/Web_HP/Views/Home/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxSZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Oceane/Source/Repos/APIWeb_ISN/Web_HP/Web_HP/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Oceane/Source/Repos/APIWeb_ISN/Web_HP/Web_HP/Views/Shared/LayoutUser.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXExheW91dFVzZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Oceane/Source/Repos/APIWeb_ISN/Web_HP/Web_HP/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Oceane/Source/Repos/APIWeb_ISN/Web_HP/Web_HP/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Oceane/Source/Repos/APIWeb_ISN/Web_HP/Web_HP/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-cnv7ypj853
