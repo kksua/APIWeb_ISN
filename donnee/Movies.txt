@@ -1,8 +1,0 @@
-CREATE TABLE [dbo].[Movies] (
-    [IdFilm]  INT            IDENTITY (1, 1) NOT NULL,
-    [NomFilm] NVARCHAR (MAX) NOT NULL,
-    [Duree]   TIME (7)       NOT NULL,
-    CONSTRAINT [PK_Movies] PRIMARY KEY CLUSTERED ([IdFilm] ASC)
-);
-
-1，Interstellar, 169 minutes

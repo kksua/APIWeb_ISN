@@ -1,9 +1,0 @@
-CREATE TABLE [dbo].[Directeurs] (
-    [IdDirecteurs]         INT            IDENTITY (1, 1) NOT NULL,
-    [NomSerie]             NVARCHAR (MAX) NOT NULL,
-    [NationaliteDirecteur] NVARCHAR (MAX) NOT NULL,
-    [ImageDirecteur]       NVARCHAR (MAX) NOT NULL,
-    CONSTRAINT [PK_Directeurs] PRIMARY KEY CLUSTERED ([IdDirecteurs] ASC)
-);
-
-1，Christopher Nolan，英国人，https://ww4.sinaimg.cn/mw690/74489744ly1hmbmyz2vi7j21871uokgf.jpg
