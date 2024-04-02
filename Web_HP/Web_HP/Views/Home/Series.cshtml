@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewData["Title"] = "Series";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Series</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container mt-3">
+    <h2>Series</h2>
+    <div id="series-container"></div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Make HTTP request to API endpoint
+        $.get("api/series", function(series) {
+            // Iterate through series and render in cards
+            series.forEach(function(serie) {
+                var serieCard = `
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h4 class="card-title">${serie.nomSerie}</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Number of Seasons:</strong> ${serie.nmbreSeasons}</p>
+                        <p><strong>Number of Episodes:</strong> ${serie.nmbreEpisode}</p>
+                    </div>
+                </div>`;
+                $("#series-container").append(serieCard);
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
+

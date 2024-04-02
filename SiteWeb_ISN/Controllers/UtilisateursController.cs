@@ -49,6 +49,24 @@ namespace APIWeb_ISN.Controllers
 
             return utilisateur;
         }
+        // GET: api/Utilisateurs/5
+        [HttpGet("{login}/{password}")]
+        public async Task<ActionResult<Utilisateur>> VerifyLogin(string login, string pwd)
+        {
+            if (_context.Utilisateur == null)
+            {
+                return NotFound();
+            }
+            //var utilisateur = await _context.Utilisateur.FindAsync(id);
+            var existingUser = await _context.Utilisateur.FirstOrDefaultAsync(u => u.NomUser == login && u.MDP == pwd);
+
+            if (existingUser == null)
+            {
+                return NotFound();
+            }
+
+            return existingUser;
+        }
 
         // PUT: api/Utilisateurs/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -121,20 +139,31 @@ namespace APIWeb_ISN.Controllers
             return (_context.Utilisateur?.Any(e => e.IdUtilisateur == id)).GetValueOrDefault();
         }
 
-        // POST: api/Utilisateur/Register
-        [HttpPost("Register")]
-        public async Task<ActionResult<Utilisateur>> Register(Utilisateur utilisateur)
+        // POST: api/Utilisateurs/Login
+        [HttpPost("Login")] // Définissez un nouveau point de terminaison pour la connexion
+        public async Task<ActionResult<Utilisateur>> Login(Utilisateur utilisateur)
         {
-            if (!ModelState.IsValid)
+            // Vérifie si l'ensemble d'entités Utilisateur est nul
+            if (_context.Utilisateur == null)
             {
-                return BadRequest(ModelState);
+                // Renvoie un problème avec un message d'erreur
+                return Problem("L'ensemble d'entités 'APIWeb_ISNContext.Utilisateur' est nul.");
             }
 
-            _context.Utilisateur.Add(utilisateur);
-            await _context.SaveChangesAsync();
+            // Vérifie si le nom d'utilisateur et le mot de passe fournis correspondent à un utilisateur existant
+            var existingUser = await _context.Utilisateur.FirstOrDefaultAsync(u => u.NomUser == utilisateur.NomUser && u.MDP == utilisateur.MDP);
 
-            return Ok(utilisateur);
+            // Si un utilisateur correspondant est trouvé
+            if (existingUser != null)
+            {
+                // Connexion réussie, renvoie les détails de l'utilisateur existant
+                return Ok(existingUser);
+            }
+            else
+            {
+                // Échec de la connexion, renvoie un message indiquant que le nom d'utilisateur ou le mot de passe est invalide
+                return NotFound("Nom d'utilisateur ou mot de passe incorrect");
+            }
         }
-
     }
 }

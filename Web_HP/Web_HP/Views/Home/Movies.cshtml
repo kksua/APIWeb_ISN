@@ -24,7 +24,7 @@
 <script>
     $(document).ready(function() {
         // Make HTTP request to API endpoint
-        $.get("https://your-api-url/movies", function(data) {
+        $.get("api/Movies", function(data) {
             // Iterate through movie data and render in cards
             data.forEach(function(movie) {
                 var movieCard = `
@@ -42,9 +42,7 @@
                 </div>`;
                 $("#movies-container").append(movieCard);
 
-                // Make additional request to get director information
-                $.get(`https://your-api-url/movies/${movie.id}/directors`, function(directorData) {
-                    // Assuming directorData contains an array of directors
+                $.get(`api/Movies/${movie.id}/directors`, function(directorData) {
                     var directors = directorData.map(director => director.nomDirecteur).join(", ");
                     $("#director-" + movie.id).text(directors);
                 });

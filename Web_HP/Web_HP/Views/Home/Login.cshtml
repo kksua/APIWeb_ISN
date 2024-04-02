@@ -1,11 +1,14 @@
-﻿@{
+﻿@model Web_HP.ViewModel.UserViewModel
+
+@{
     ViewData["Title"] = "Login";
 }
+
 @{
     Layout = "LayoutUser";
 }
-<!DOCTYPE html>
 
+<!DOCTYPE html>
 <html>
 <head>
     <title>Login</title>
@@ -37,20 +40,19 @@
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
                 <div class="custom-container">
-                    <form id="loginForm">
+                    <form method="post">
                         <div class="input-group mb-3">
-                            <span class="input-group-text" id="inputGroup-sizing-default">Nom utilisateur</span>
-                            <input id="username" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Adresse mail</span>
+                            @Html.TextBoxFor(m => m.Utilisateur.Email, new { @class = "form-control", aria_label = "Sizing example input", aria_describedby = "inputGroup-sizing-default" })
+                            @Html.ValidationMessageFor(m => m.Utilisateur.Email)
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="inputGroup-sizing-default">Mot de passe</span>
-                            <input id="password" type="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                            @Html.PasswordFor(m => m.Utilisateur.MDP, new { @class = "form-control", aria_label = "Sizing example input", aria_describedby = "inputGroup-sizing-default" })
+                            @Html.ValidationMessageFor(m => m.Utilisateur.MDP)
                         </div>
-                        <div class="create-account-text">
-                            Si vous n'avez pas de compte, veuillez
-                            <a href="Register">cliquer ici</a>.
-                        </div>
-                        <button type="submit" class="btn btn-info">Valider</button>
+                        <input type="submit" value="Se connecter" class="btn btn-info">
+                        <br />
                     </form>
                 </div>
             </div>
@@ -58,30 +60,7 @@
     </div>
 
     <div id="message"></div>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
- <script>
-        $(document).ready(function () {
-            $('#submitBtn').click(function () {
-                var formData = {
-                    NomUser: $('#username').val(),
-                    MDP: $('#password').val()
-                };
-
-                $.ajax({
-                    type: 'POST',
-                    url: '/api/Utilisateurs/Register',
-                    data: JSON.stringify(formData),
-                    contentType: 'application/json',
-                    success: function (data) {
-                        $('#message').text('Login successful. Welcome, ' + data.NomUser);
-                    },
-                    error: function (xhr, textStatus, errorThrown) {
-                        $('#message').text('Login failed: ' + xhr.responseJSON.Message);
-                    }
-                });
-            });
-        });
-    </script>
 </body>
 </html>
+
+

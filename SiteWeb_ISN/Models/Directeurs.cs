@@ -10,7 +10,7 @@ public class Directeurs
         [Key]
     public int IdDirecteurs { get; set; }
 
-    public string NomSerie { get; set; }
+    public string NomSerie { get; set; } = string.Empty;
 
     public string NationaliteDirecteur { get; set; } = string.Empty;
 
