@@ -1,40 +1,26 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using APIWeb_ISN.Data;
-var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<APIWeb_ISNContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("APIWeb_ISNContext") ?? throw new InvalidOperationException("Connection string 'APIWeb_ISNContext' not found.")));
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
-// Add services to the container.
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+namespace APIWeb_ISN
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            CreateHostBuilder(args).Build().Run();
+        }
+
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                });
+    }
 }
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-
-app.MapControllers();
-//ajout pour creation bdd
-#pragma warning disable CS8602//Dereferencement d'une eventuelle reference n
-using (var serviceScope = app.Services.GetService<IServiceScopeFactory>().CreateScope())
-{
-    var context = serviceScope.ServiceProvider.GetRequiredService<APIWeb_ISNContext>();
-    context.Database.EnsureDeleted();
-    context.Database.EnsureCreated();
-}
-#pragma warning restore CS8602//Dereferencement d'une eventuelle reference n
-
-app.Run();

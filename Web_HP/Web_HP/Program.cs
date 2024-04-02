@@ -1,4 +1,9 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Web_HP.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<Web_HPContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Web_HPContext") ?? throw new InvalidOperationException("Connection string 'Web_HPContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
