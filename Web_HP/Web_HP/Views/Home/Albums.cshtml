@@ -1,4 +1,13 @@
-﻿
+﻿@{
+    Layout = "_Layout";
+}
+@{
+    ViewData["Title"] = "Albums";
+}
+
+@{
+    Layout = "_Layout";
+}
 @{
     ViewData["Title"] = "Albums";
 }
@@ -22,7 +31,13 @@
 <script>
     $(document).ready(function() {
         // Make HTTP request to API endpoint
-        $.get("api/albums", function(albums) {
+        $.get("/api/albums", function(albums) {
+            // Check if albums are available
+            if(albums.length === 0) {
+                $("#albums-container").html("<p>No albums found</p>");
+                return;
+            }
+            
             // Iterate through albums and render in cards
             albums.forEach(function(album) {
                 var albumCard = `
@@ -44,17 +59,32 @@
                 // Load initial songs for the album
                 loadSongs(album.idAlbum, 3);
             });
+        }).fail(function(xhr, textStatus, errorThrown) {
+            // Handle API request failure
+            $("#albums-container").html("<p>Error loading albums. Please try again later.</p>");
+            console.error(xhr, textStatus, errorThrown);
         });
     });
 
     // Function to load songs for a specific album
     function loadSongs(albumId, count) {
-        $.get(`/api/albums/${albumId}/songs?count=${count}`, function(songs) {
-            var songList = "";
-            songs.forEach(function(song) {
-                songList += `<li class="list-group-item">${song.title}</li>`;
+        $.get(`/api/albums/${albumId}`, function(album) {
+            if(!album) {
+                console.error("Album not found");
+                return;
+            }
+
+            $.get(`/api/albums/${albumId}/songs?count=${count}`, function(songs) {
+                var songList = "";
+                songs.forEach(function(song) {
+                    songList += `<li class="list-group-item">${song.title}</li>`;
+                });
+                $("#songs-" + albumId).html(songList);
+            }).fail(function(xhr, textStatus, errorThrown) {
+                console.error("Error loading songs", xhr, textStatus, errorThrown);
             });
-            $("#songs-" + albumId).append(songList);
+        }).fail(function(xhr, textStatus, errorThrown) {
+            console.error("Error loading album", xhr, textStatus, errorThrown);
         });
     }
 
@@ -64,5 +94,7 @@
     }
 </script>
 
+
 </body>
 </html>
+

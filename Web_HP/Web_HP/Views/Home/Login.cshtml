@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Login";
 }
 @{
@@ -38,14 +37,14 @@
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
                 <div class="custom-container">
-                    <form action="/action_page.php">
+                    <form id="loginForm">
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="inputGroup-sizing-default">Nom utilisateur</span>
-                            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                            <input id="username" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="inputGroup-sizing-default">Mot de passe</span>
-                            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                            <input id="password" type="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                         </div>
                         <div class="create-account-text">
                             Si vous n'avez pas de compte, veuillez
@@ -61,28 +60,23 @@
     <div id="message"></div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
+ <script>
         $(document).ready(function () {
-            $('#loginForm').submit(function (event) {
-                event.preventDefault();
-
+            $('#submitBtn').click(function () {
                 var formData = {
-                    username: $('#username').val(),
-                    password: $('#password').val()
+                    NomUser: $('#username').val(),
+                    MDP: $('#password').val()
                 };
 
                 $.ajax({
                     type: 'POST',
-                    url: '/api/login', // API endpoint
+                    url: '/api/Utilisateurs/Register',
                     data: JSON.stringify(formData),
                     contentType: 'application/json',
                     success: function (data) {
-                        // Login successful
-                        $('#message').text('Login successful. Welcome, ' + data.Username);
-                        // Redirect or do something else after successful login
+                        $('#message').text('Login successful. Welcome, ' + data.NomUser);
                     },
                     error: function (xhr, textStatus, errorThrown) {
-                        // Login failed
                         $('#message').text('Login failed: ' + xhr.responseJSON.Message);
                     }
                 });
@@ -91,5 +85,3 @@
     </script>
 </body>
 </html>
-
-
