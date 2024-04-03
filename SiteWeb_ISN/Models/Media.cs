@@ -1,7 +1,6 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations;
 
 namespace APIWeb_ISN.Models;
 public class Media

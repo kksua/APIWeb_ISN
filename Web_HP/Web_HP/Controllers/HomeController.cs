@@ -19,7 +19,8 @@ namespace Web_HP.Controllers
         }
         public IActionResult Login()
         {
-            return View();
+            // Redirect to the Login action in the Login controller
+            return RedirectToAction("Index", "Login");
         }
         public IActionResult Register()
         {

@@ -11,24 +11,39 @@ namespace Web_HP.Controllers
 {
     public class LoginController : Controller
     {
-        [HttpPost]
-        public ActionResult Index(UserViewModel viewModel)
+        public IActionResult Index()
         {
-            //if (ModelState.IsValid)
+            UserViewModel viewModel = new UserViewModel {  };
+            //if (HttpContext.User.Identity.IsAuthenticated)
+            //{
+            //    viewModel.User = API.Instance.GetUser(HttpContext.User.Identity.Name).Result;
+            //}
+            //else
+            //{
+            //    HttpContext.User.Identity.;
+            //}
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Index(UserViewModel viewModel)
+        {
+            if (viewModel.Utilisateur != null)
             {
-                Utilisateur utilisateur = API.Instance.GetUser(viewModel.Utilisateur.Email, viewModel.Utilisateur.MDP).Result;
+                Utilisateur utilisateur = await API.Instance.VerifyLogin(viewModel.Utilisateur.Email, viewModel.Utilisateur.MDP);
                 if (utilisateur != null)
                 {
-                    return Redirect("/Home/Index");
+                    // Redirect to HomeController's Index action
+                    return RedirectToAction("Index", "Home");
                 }
-                ModelState.AddModelError("Utilisateur.Login", "Login et/ou mot de passe incorrect(s)");
+                ModelState.AddModelError("Utilisateur.Email", "Email et/ou mot de passe incorrect(s)");
+            }
+            else
+            {
+                ModelState.AddModelError("Utilisateur", "Utilisateur est null");
             }
             return View(viewModel);
         }
 
-        public ActionResult Deconnexion()
-        {
-            return Redirect("/");
-        }
     }
 }

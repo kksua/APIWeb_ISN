@@ -49,16 +49,17 @@ namespace APIWeb_ISN.Controllers
 
             return utilisateur;
         }
+
         // GET: api/Utilisateurs/5
-        [HttpGet("{login}/{password}")]
-        public async Task<ActionResult<Utilisateur>> VerifyLogin(string login, string pwd)
+        [HttpGet("{email}/{pwd}")]
+        public async Task<ActionResult<Utilisateur>> VerifyLogin(string email, string pwd)
         {
             if (_context.Utilisateur == null)
             {
                 return NotFound();
             }
             //var utilisateur = await _context.Utilisateur.FindAsync(id);
-            var existingUser = await _context.Utilisateur.FirstOrDefaultAsync(u => u.NomUser == login && u.MDP == pwd);
+            var existingUser = await _context.Utilisateur.FirstOrDefaultAsync(u => u.Email == email && u.MDP == pwd);
 
             if (existingUser == null)
             {
@@ -73,7 +74,7 @@ namespace APIWeb_ISN.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUtilisateur(int id, Utilisateur utilisateur)
         {
-            if (id != utilisateur.IdUtilisateur)
+            if (id != utilisateur.Id)
             {
                 return BadRequest();
             }
@@ -111,7 +112,7 @@ namespace APIWeb_ISN.Controllers
             _context.Utilisateur.Add(utilisateur);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUtilisateur", new { id = utilisateur.IdUtilisateur }, utilisateur);
+            return CreatedAtAction("GetUtilisateur", new { id = utilisateur.Id }, utilisateur);
         }
 
         // DELETE: api/Utilisateurs/5
@@ -136,34 +137,7 @@ namespace APIWeb_ISN.Controllers
 
         private bool UtilisateurExists(int id)
         {
-            return (_context.Utilisateur?.Any(e => e.IdUtilisateur == id)).GetValueOrDefault();
-        }
-
-        // POST: api/Utilisateurs/Login
-        [HttpPost("Login")] // Définissez un nouveau point de terminaison pour la connexion
-        public async Task<ActionResult<Utilisateur>> Login(Utilisateur utilisateur)
-        {
-            // Vérifie si l'ensemble d'entités Utilisateur est nul
-            if (_context.Utilisateur == null)
-            {
-                // Renvoie un problème avec un message d'erreur
-                return Problem("L'ensemble d'entités 'APIWeb_ISNContext.Utilisateur' est nul.");
-            }
-
-            // Vérifie si le nom d'utilisateur et le mot de passe fournis correspondent à un utilisateur existant
-            var existingUser = await _context.Utilisateur.FirstOrDefaultAsync(u => u.NomUser == utilisateur.NomUser && u.MDP == utilisateur.MDP);
-
-            // Si un utilisateur correspondant est trouvé
-            if (existingUser != null)
-            {
-                // Connexion réussie, renvoie les détails de l'utilisateur existant
-                return Ok(existingUser);
-            }
-            else
-            {
-                // Échec de la connexion, renvoie un message indiquant que le nom d'utilisateur ou le mot de passe est invalide
-                return NotFound("Nom d'utilisateur ou mot de passe incorrect");
-            }
+            return (_context.Utilisateur?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

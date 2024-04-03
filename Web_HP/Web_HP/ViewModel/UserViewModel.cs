@@ -7,6 +7,6 @@ namespace Web_HP.ViewModel
 {
     public class UserViewModel
     {
-        public Utilisateur Utilisateur { get; set; }
+        public Utilisateur? Utilisateur { get; set; }
     }
 }

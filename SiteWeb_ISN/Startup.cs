@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using APIWeb_ISN.Data;
 namespace APIWeb_ISN
 {
@@ -17,7 +18,7 @@ namespace APIWeb_ISN
             services.AddControllers();
 
             services.AddDbContext<APIWeb_ISNContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("API_ISNContext")));
+                    options.UseSqlServer(Configuration.GetConnectionString("APIWeb_ISNContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,12 +37,17 @@ namespace APIWeb_ISN
             {
                 endpoints.MapControllers();
             });
-            // ajout pour création bdd
-            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+
+            // Safely access IServiceScopeFactory
+            var serviceScopeFactory = app.ApplicationServices?.GetService<IServiceScopeFactory>();
+            if (serviceScopeFactory != null)
             {
-                var context = serviceScope.ServiceProvider.GetRequiredService<APIWeb_ISNContext>();
-                //context.Database.EnsureDeleted();
-                context.Database.EnsureCreated();
+                using (var serviceScope = serviceScopeFactory.CreateScope())
+                {
+                    var context = serviceScope.ServiceProvider.GetRequiredService<APIWeb_ISNContext>();
+                    //context.Database.EnsureDeleted();
+                    context.Database.EnsureCreated();
+                }
             }
         }
     }
