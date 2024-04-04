@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using APIWeb_ISN.Data;
 using APIWeb_ISN.Models;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace APIWeb_ISN.Controllers
 {
@@ -21,6 +22,7 @@ namespace APIWeb_ISN.Controllers
             _context = context;
         }
 
+      
         // GET: api/Albums
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Album>>> GetAlbum()

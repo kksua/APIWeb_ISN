@@ -1,68 +1,87 @@
-﻿
-@{
-    ViewData["Title"] = "Albums";
-}
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Albums</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Albums</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .album {
+            display: inline-block;
+            width: calc(33.33% - 20px);
+            margin: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .album img {
+            width: 100%;
+            height: auto;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+
+        .album h2 {
+            padding: 10px;
+            margin: 0;
+            color: #333;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <h1>Albums</h1>
+        <div id="albumList"></div>
+    </div>
 
-<div class="container mt-3">
-    <h2>Albums</h2>
-    <div id="albums-container"></div>
-</div>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script>
-    $(document).ready(function() {
-        // Make HTTP request to API endpoint
-        $.get("api/albums", function(albums) {
-            // Iterate through albums and render in cards
-            albums.forEach(function(album) {
-                var albumCard = `
-                <div class="card mb-3">
-                    <div class="card-header">
-                        <h4 class="card-title">${album.nomAlbum}</h4>
-                    </div>
-                    <div class="card-body">
-                        <img class="card-img-top" src="${album.image}" alt="${album.nomAlbum}" style="width:100%">
-                        <h5 class="mt-2">Chansons:</h5>
-                        <ul id="songs-${album.idAlbum}" class="list-group">
-                            <!-- Songs will be dynamically added here -->
-                        </ul>
-                        <button class="btn btn-primary mt-2" onclick="loadMoreSongs(${album.idAlbum})">See More Songs</button>
-                    </div>
-                </div>`;
-                $("#albums-container").append(albumCard);
-
-                // Load initial songs for the album
-                loadSongs(album.idAlbum, 3);
-            });
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('/api/Album')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const albumList = document.getElementById('albumList');
+                    data.forEach(album => {
+                        const div = document.createElement('div');
+                        div.classList.add('album');
+                        const img = document.createElement('img');
+                        img.src = album.image;
+                        img.alt = album.nomAlbum + ' image';
+                        const h2 = document.createElement('h2');
+                        h2.textContent = album.nomAlbum;
+                        div.appendChild(img);
+                        div.appendChild(h2);
+                        albumList.appendChild(div);
+                    });
+                })
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
+                });
         });
-    });
-
-    // Function to load songs for a specific album
-    function loadSongs(albumId, count) {
-        $.get(`/api/albums/${albumId}/songs?count=${count}`, function(songs) {
-            var songList = "";
-            songs.forEach(function(song) {
-                songList += `<li class="list-group-item">${song.title}</li>`;
-            });
-            $("#songs-" + albumId).append(songList);
-        });
-    }
-
-    // Function to load more songs for a specific album
-    function loadMoreSongs(albumId) {
-        loadSongs(albumId, 5); // Load 5 more songs
-    }
-</script>
-
+    </script>
 </body>
 </html>

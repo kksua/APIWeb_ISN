@@ -10,5 +10,7 @@ namespace APIWeb_ISN.Models
         public string Image { get; set; } = string.Empty;
         public ICollection<Chanson>? Chansons { get; set; }
         public virtual ICollection<Ouvrage>? Ouvrages { get; set; }
+
+        public ICollection<Album> Albums { get; set; } = new List<Album>();
     }
 }

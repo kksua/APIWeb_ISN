@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movies</title>
+    <title>Series</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -23,7 +23,7 @@
             color: #333;
         }
 
-        .movie {
+        .series {
             display: inline-block;
             width: calc(33.33% - 20px);
             margin: 10px;
@@ -32,14 +32,14 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
-            .movie img {
+            .series img {
                 width: 100%;
                 height: auto;
                 border-top-left-radius: 5px;
                 border-top-right-radius: 5px;
             }
 
-            .movie h2 {
+            .series h2 {
                 padding: 10px;
                 margin: 0;
                 color: #333;
@@ -47,35 +47,26 @@
                 font-weight: bold;
             }
 
-        .movie-info {
+        .series-info {
             padding: 10px;
         }
 
-            .movie-info p {
+            .series-info p {
                 margin: 5px 0;
                 font-size: 14px;
                 color: #666;
             }
-
-            .movie-info a {
-                text-decoration: none;
-                color: #007bff;
-            }
-
-                .movie-info a:hover {
-                    text-decoration: underline;
-                }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Movies</h1>
-        <div id="movieList"></div>
+        <h1>Series</h1>
+        <div id="seriesList"></div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            fetch('/api/Movie')
+            fetch('/api/Series')
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
@@ -83,33 +74,27 @@
                     return response.json();
                 })
                 .then(data => {
-                    const movieList = document.getElementById('movieList');
-                    data.forEach(movie => {
+                    const seriesList = document.getElementById('seriesList');
+                    data.forEach(serie => {
                         const div = document.createElement('div');
-                        div.classList.add('movie');
+                        div.classList.add('series');
                         const img = document.createElement('img');
-                        img.src = movie.image;
-                        img.alt = movie.NomFilm + ' image';
+                        img.src = serie.image;
+                        img.alt = serie.NomSerie + ' image';
                         const h2 = document.createElement('h2');
-                        h2.textContent = movie.NomFilm;
-                        const movieInfo = document.createElement('div');
-                        movieInfo.classList.add('movie-info');
-                        const duree = document.createElement('p');
-                        duree.textContent = 'Durée: ' + movie.Duree;
-                        const description = document.createElement('p');
-                        description.textContent = movie.description;
-                        const lien = document.createElement('p');
-                        const lienAnchor = document.createElement('a');
-                        lienAnchor.href = movie.lien;
-                        lienAnchor.textContent = 'Regarder la bande annonce';
-                        lien.appendChild(lienAnchor);
-                        movieInfo.appendChild(duree);
-                        movieInfo.appendChild(description);
-                        movieInfo.appendChild(lien);
+                        h2.textContent = serie.NomSerie;
+                        const seriesInfo = document.createElement('div');
+                        seriesInfo.classList.add('series-info');
+                        const seasons = document.createElement('p');
+                        seasons.textContent = 'Saisons: ' + serie.NmbreSeasons;
+                        const episodes = document.createElement('p');
+                        episodes.textContent = 'Episodes: ' + serie.NmbreEpisode;
+                        seriesInfo.appendChild(seasons);
+                        seriesInfo.appendChild(episodes);
                         div.appendChild(img);
                         div.appendChild(h2);
-                        div.appendChild(movieInfo);
-                        movieList.appendChild(div);
+                        div.appendChild(seriesInfo);
+                        seriesList.appendChild(div);
                     });
                 })
                 .catch(error => {

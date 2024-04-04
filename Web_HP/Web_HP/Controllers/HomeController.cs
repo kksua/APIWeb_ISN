@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using APIWeb_ISN.Models;
+using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using Web_HP.Models;
 
@@ -13,8 +14,9 @@ namespace Web_HP.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+       public IActionResult Index()
         {
+
             return View();
         }
 
@@ -25,6 +27,7 @@ namespace Web_HP.Controllers
 
         public IActionResult Albums()
         {
+            
             return View();
         }
 

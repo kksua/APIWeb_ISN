@@ -120,5 +120,7 @@ namespace APIWeb_ISN.Controllers
         {
             return (_context.Acteur?.Any(e => e.IdActeur == id)).GetValueOrDefault();
         }
+
+        
     }
 }
