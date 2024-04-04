@@ -50,6 +50,10 @@ namespace Web_HP.Controllers
         {
             return View();
         }
+        public IActionResult Series()
+        {
+            return View();
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

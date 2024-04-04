@@ -1,51 +1,121 @@
-﻿@{
-    Layout = "_Layout";
-}
-@{
-    ViewData["Title"] = "Chansons";
-}
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Chansons</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chansons</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .chanson {
+            display: inline-block;
+            width: calc(33.33% - 20px);
+            margin: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+            .chanson img {
+                width: 100%;
+                height: auto;
+                border-top-left-radius: 5px;
+                border-top-right-radius: 5px;
+            }
+
+            .chanson h2 {
+                padding: 10px;
+                margin: 0;
+                color: #333;
+                font-size: 18px;
+                font-weight: bold;
+            }
+
+        .chanson-info {
+            padding: 10px;
+        }
+
+            .chanson-info p {
+                margin: 5px 0;
+                font-size: 14px;
+                color: #666;
+            }
+
+            .chanson-info a {
+                text-decoration: none;
+                color: #007bff;
+            }
+
+                .chanson-info a:hover {
+                    text-decoration: underline;
+                }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <h1>Chansons</h1>
+        <div id="chansonList"></div>
+    </div>
 
-<div class="container mt-3">
-    <h2>Chansons</h2>
-    <div id="chansons-container"></div>
-</div>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script>
-    $(document).ready(function() {
-        // Make HTTP request to API endpoint
-        $.get("api/chansons", function(chansons) {
-            // Iterate through chansons and render in cards
-            chansons.forEach(function(chanson) {
-                var chansonCard = `
-                <div class="card mb-3">
-                    <div class="card-header">
-                        <h4 class="card-title">${chanson.nomChanson}</h4>
-                    </div>
-                    <div class="card-body">
-                        <img class="card-img-top" src="${chanson.image}" alt="${chanson.nomChanson}" style="width:100%">
-                        <p class="mt-2"><strong>Genre:</strong> ${chanson.genre}</p>
-                        <p><strong>Langue:</strong> ${chanson.langue}</p>
-                        <a href="${chanson.lien}" class="btn btn-primary" target="_blank">Listen</a>
-                    </div>
-                </div>`;
-                $("#chansons-container").append(chansonCard);
-            });
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('/api/Chanson')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const chansonList = document.getElementById('chansonList');
+                    data.forEach(chanson => {
+                        const div = document.createElement('div');
+                        div.classList.add('chanson');
+                        const img = document.createElement('img');
+                        img.src = chanson.image;
+                        img.alt = chanson.nomChanson + ' image';
+                        const h2 = document.createElement('h2');
+                        h2.textContent = chanson.nomChanson;
+                        const chansonInfo = document.createElement('div');
+                        chansonInfo.classList.add('chanson-info');
+                        const genre = document.createElement('p');
+                        genre.textContent = 'Genre: ' + chanson.genre;
+                        const langue = document.createElement('p');
+                        langue.textContent = 'Langue: ' + chanson.langue;
+                        const lien = document.createElement('p');
+                        const lienAnchor = document.createElement('a');
+                        lienAnchor.href = chanson.lien;
+                        lienAnchor.textContent = 'Ecouter sur YouTube';
+                        lien.appendChild(lienAnchor);
+                        chansonInfo.appendChild(genre);
+                        chansonInfo.appendChild(langue);
+                        chansonInfo.appendChild(lien);
+                        div.appendChild(img);
+                        div.appendChild(h2);
+                        div.appendChild(chansonInfo);
+                        chansonList.appendChild(div);
+                    });
+                })
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
+                });
         });
-    });
-</script>
-
+    </script>
 </body>
 </html>
-
-

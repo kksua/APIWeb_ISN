@@ -80,5 +80,30 @@ namespace Web_HP.Controllers
 #pragma warning restore CS8603 // Existence possible d'un retour de référence null.
         }
 
+        // Méthode pour récupérer la liste des albums
+        public async Task<List<Album>> GetAlbums()
+        {
+            List<Album> albums = null;
+            HttpResponseMessage response = await client.GetAsync("api/albums");
+            if (response.IsSuccessStatusCode)
+            {
+                var resp = await response.Content.ReadAsStringAsync();
+                albums = JsonConvert.DeserializeObject<List<Album>>(resp);
+            }
+            return albums;
+        }
+
+        // Méthode pour récupérer un album par son ID
+        public async Task<Album> GetAlbum(int id)
+        {
+            Album album = null;
+            HttpResponseMessage response = await client.GetAsync($"api/albums/{id}");
+            if (response.IsSuccessStatusCode)
+            {
+                var resp = await response.Content.ReadAsStringAsync();
+                album = JsonConvert.DeserializeObject<Album>(resp);
+            }
+            return album;
+        }
     }
 }

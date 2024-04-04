@@ -1,55 +1,121 @@
-﻿@{
-    Layout = "_Layout";
-}
-@{
-    ViewData["Title"] = "Movies";
-}
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Movies</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .movie {
+            display: inline-block;
+            width: calc(33.33% - 20px);
+            margin: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+            .movie img {
+                width: 100%;
+                height: auto;
+                border-top-left-radius: 5px;
+                border-top-right-radius: 5px;
+            }
+
+            .movie h2 {
+                padding: 10px;
+                margin: 0;
+                color: #333;
+                font-size: 18px;
+                font-weight: bold;
+            }
+
+        .movie-info {
+            padding: 10px;
+        }
+
+            .movie-info p {
+                margin: 5px 0;
+                font-size: 14px;
+                color: #666;
+            }
+
+            .movie-info a {
+                text-decoration: none;
+                color: #007bff;
+            }
+
+                .movie-info a:hover {
+                    text-decoration: underline;
+                }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <h1>Movies</h1>
+        <div id="movieList"></div>
+    </div>
 
-<div class="container mt-3">
-    <h2>Movies</h2>
-    <div class="row" id="movies-container"></div>
-</div>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script>
-    $(document).ready(function() {
-        // Make HTTP request to API endpoint
-        $.get("api/Movies", function(data) {
-            // Iterate through movie data and render in cards
-            data.forEach(function(movie) {
-                var movieCard = `
-                <div class="col-sm-4">
-                    <div class="card" style="width: 100%;">
-                        <img class="card-img-top" src="${movie.image}" alt="${movie.title}" style="width:100%">
-                        <div class="card-body">
-                            <h4 class="card-title">${movie.title}</h4>
-                            <p class="card-text">Director: <span id="director-${movie.id}">Loading...</span></p>
-                            <p class="card-text">Year: ${movie.year}</p>
-                            <p class="card-text">Genre: ${movie.genre}</p>
-                            <a href="#" class="btn btn-primary">See Details</a>
-                        </div>
-                    </div>
-                </div>`;
-                $("#movies-container").append(movieCard);
-
-                $.get(`api/Movies/${movie.id}/directors`, function(directorData) {
-                    var directors = directorData.map(director => director.nomDirecteur).join(", ");
-                    $("#director-" + movie.id).text(directors);
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('/api/Movie')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const movieList = document.getElementById('movieList');
+                    data.forEach(movie => {
+                        const div = document.createElement('div');
+                        div.classList.add('movie');
+                        const img = document.createElement('img');
+                        img.src = movie.image;
+                        img.alt = movie.NomFilm + ' image';
+                        const h2 = document.createElement('h2');
+                        h2.textContent = movie.NomFilm;
+                        const movieInfo = document.createElement('div');
+                        movieInfo.classList.add('movie-info');
+                        const duree = document.createElement('p');
+                        duree.textContent = 'Durée: ' + movie.Duree;
+                        const description = document.createElement('p');
+                        description.textContent = movie.description;
+                        const lien = document.createElement('p');
+                        const lienAnchor = document.createElement('a');
+                        lienAnchor.href = movie.lien;
+                        lienAnchor.textContent = 'Regarder la bande annonce';
+                        lien.appendChild(lienAnchor);
+                        movieInfo.appendChild(duree);
+                        movieInfo.appendChild(description);
+                        movieInfo.appendChild(lien);
+                        div.appendChild(img);
+                        div.appendChild(h2);
+                        div.appendChild(movieInfo);
+                        movieList.appendChild(div);
+                    });
+                })
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
                 });
-            });
         });
-    });
-</script>
-
+    </script>
 </body>
 </html>
