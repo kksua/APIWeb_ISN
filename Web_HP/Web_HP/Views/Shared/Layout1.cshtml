@@ -1,27 +1,38 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Définition de l'encodage et de la vue initiale -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Styles Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Scripts jQuery, Popper.js et Bootstrap -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Kit Font Awesome pour les icônes -->
     <script src="https://kit.fontawesome.com/47a8f3b46f.js"></script>
 </head>
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="50">
+    <!-- En-tête de la page -->
     <header>
+        <!-- Barre de navigation Bootstrap -->
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
             <div class="container-fluid">
+                <!-- Marque de la barre de navigation -->
                 <a class="navbar-brand" href="~/Home/Index">Xilo</a>
+                <!-- Bouton de bascule pour la navigation mobile -->
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+                <!-- Contenu de la barre de navigation -->
                 <div class="collapse navbar-collapse" id="collapsibleNavbar">
                     <ul class="navbar-nav">
+                        <!-- Élément de navigation vers la page d'accueil -->
                         <li class="nav-item">
-                            <a class="nav-link" href="~/Home/Home">Home</a>
+                            <a class="nav-link" href="~/Home/Home">Accueil</a>
                         </li>
+                        <!-- Élément de navigation vers la page de connexion -->
                         <li class="nav-item">
                             <a class="nav-link" href="~/Login/Index">
                                 <i class="fas fa-user"></i>
@@ -37,7 +48,7 @@
             @RenderBody()
         </main>
     </div>
-
+    <!-- Pied de page -->
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2024 - Web_HP 

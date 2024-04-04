@@ -46,16 +46,16 @@
     <script>
         $(document).ready(function () {
             $('.carousel-item img').click(function () {
-                // Get the data-target attribute value of the clicked image
+                // Obtenir la valeur de l'attribut data-target-url de l'image cliquée
                 var targetUrl = $(this).data('target-url');
-                // Redirect the user to the specified URL
+                // Rediriger l'utilisateur vers l'URL spécifiée
                 window.location.href = targetUrl;
             });
         });
     </script>
     <div class="container">
         <div class="text-center">
-            <!-- Display welcome message if set -->
+            <!-- Afficher le message de bienvenue s'il est défini -->
             @if (ViewBag.WelcomeMessage != null)
             {
                 <h1 class="display-4 font-weight-bold">@ViewBag.WelcomeMessage</h1>
