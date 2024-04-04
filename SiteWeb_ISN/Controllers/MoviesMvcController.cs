@@ -11,7 +11,7 @@ namespace APIWeb_ISN.Controllers
     {
         private readonly List<Movies> _movies = new List<Movies>
         {
-            new Movies { IdFilm = 1, NomFilm = "Interstellar", Duree = "2h 49m", image = "https://images.app.goo.gl/XyMbtd5bR8gnvMJ97", description = "Set in a dystopian future where humanity is embroiled in a catastrophic blight and famine, the film follows a group of astronauts who travel through a wormhole near Saturn in search of a new home for humankind." }
+            new Movies { IdFilm = 1, NomFilm = "Interstellar", Duree = "2h49m", image = "https://images.app.goo.gl/XyMbtd5bR8gnvMJ97", description = "Set in a dystopian future where humanity is embroiled in a catastrophic blight and famine, the film follows a group of astronauts who travel through a wormhole near Saturn in search of a new home for humankind." }
         };
 
         // GET: api/Movies

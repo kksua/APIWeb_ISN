@@ -11,7 +11,8 @@ namespace APIWeb_ISN.Controllers
     {
         private readonly List<Chanteur> _chanteurs = new List<Chanteur>
         {
-            new Chanteur { IdChanteur = 1, Nom = "张学友", nationaliteChanteur = "中国", Image = "https://example.com/zhangxueyou.jpg" }
+           new Chanteur { IdChanteur = 1, Nom = "ZHANG Jie", nationaliteChanteur = "Chinois", Image = "https://y.qq.com/music/photo_new/T001R300x300M000002azErJ0UcDN6_3.jpg?max_age=2592000" },
+            new Chanteur { IdChanteur = 2, Nom = "SEVENTEEN", nationaliteChanteur = "Groupe Coréen", Image = "https://file.krfanyi.com/krfanyi/202110/23/220235621.png" }
         };
 
         // GET: api/Chanteur
