@@ -24,17 +24,24 @@ namespace Web_HP.Controllers
             //}
             return View(viewModel);
         }
+        public IActionResult Home2()
+        {
+            return View();
+        }
 
         [HttpPost]
         public async Task<ActionResult> Index(UserViewModel viewModel)
         {
             if (viewModel.Utilisateur != null)
             {
+#pragma warning disable CS8604 // Existence possible d'un argument de référence null.
                 Utilisateur utilisateur = await API.Instance.VerifyLogin(viewModel.Utilisateur.Email, viewModel.Utilisateur.MDP);
+#pragma warning restore CS8604 // Existence possible d'un argument de référence null.
                 if (utilisateur != null)
                 {
+                    ViewBag.WelcomeMessage = $"Welcome, {utilisateur.NomUser}!";
                     // Redirect to HomeController's Index action
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Home2", "Login");
                 }
                 ModelState.AddModelError("Utilisateur.Email", "Email et/ou mot de passe incorrect(s)");
             }

@@ -15,10 +15,10 @@ public class FavoriteMedia
     public int IdUtilisateur { get; set; } 
 
     [ForeignKey("IdFilm")]
-    public Movies Movies { get; set; }
+    public Movies? Movies { get; set; }
 
     [ForeignKey("IdUtilisateur")]
-    public Utilisateur Utilisateur { get; set; }
+    public Utilisateur? Utilisateur { get; set; }
 
     public bool FavoriteMedias { get; set; }
 
