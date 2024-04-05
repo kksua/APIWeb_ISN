@@ -21,27 +21,26 @@ namespace APIWeb_ISN.Controllers
             _context = context;
         }
 
-        // GET: api/Albums
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Album>>> GetAlbum()
+
+
+        private readonly List<Album> _albums = new List<Album>
         {
-          if (_context.Album == null)
-          {
-              return NotFound();
-          }
-            return await _context.Album.ToListAsync();
+            new Album { IdAlbum = 1, NomAlbum = "WHITE NIGHT", Image = "https://images.app.goo.gl/b9mmb5RELd9yEGno6" },
+            new Album { IdAlbum = 2, NomAlbum = "SEVENTEEN 11th Mini Album 'SEVENTEENTH HEAVEN'", Image = "https://i.scdn.co/image/ab67616d0000b273d07a54abba4f5060c2486e3c" }
+        };
+
+        // GET: api/Album
+        [HttpGet]
+        public ActionResult<IEnumerable<Album>> GetAlbums()
+        {
+            return _albums;
         }
 
-        // GET: api/Albums/5
+        // GET: api/Album/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Album>> GetAlbum(int id)
+        public ActionResult<Album> GetAlbum(int id)
         {
-          if (_context.Album == null)
-          {
-              return NotFound();
-          }
-            var album = await _context.Album.FindAsync(id);
-
+            var album = _albums.FirstOrDefault(a => a.IdAlbum == id);
             if (album == null)
             {
                 return NotFound();
@@ -50,75 +49,49 @@ namespace APIWeb_ISN.Controllers
             return album;
         }
 
-        // PUT: api/Albums/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // POST: api/Album
+        [HttpPost]
+        public ActionResult<Album> PostAlbum(Album album)
+        {
+            _albums.Add(album);
+            return CreatedAtAction(nameof(GetAlbum), new { id = album.IdAlbum }, album);
+        }
+
+        // PUT: api/Album/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAlbum(int id, Album album)
+        public IActionResult PutAlbum(int id, Album album)
         {
             if (id != album.IdAlbum)
             {
                 return BadRequest();
             }
 
-            _context.Entry(album).State = EntityState.Modified;
+            var existingAlbum = _albums.FirstOrDefault(a => a.IdAlbum == id);
+            if (existingAlbum == null)
+            {
+                return NotFound();
+            }
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!AlbumExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            existingAlbum.NomAlbum = album.NomAlbum;
+            existingAlbum.Image = album.Image;
 
             return NoContent();
         }
 
-        // POST: api/Albums
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Album>> PostAlbum(Album album)
-        {
-          if (_context.Album == null)
-          {
-              return Problem("Entity set 'APIWeb_ISNContext.Album'  is null.");
-          }
-            _context.Album.Add(album);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetAlbum", new { id = album.IdAlbum }, album);
-        }
-
-        // DELETE: api/Albums/5
+        // DELETE: api/Album/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAlbum(int id)
+        public IActionResult DeleteAlbum(int id)
         {
-            if (_context.Album == null)
-            {
-                return NotFound();
-            }
-            var album = await _context.Album.FindAsync(id);
-            if (album == null)
+            var albumToRemove = _albums.FirstOrDefault(a => a.IdAlbum == id);
+            if (albumToRemove == null)
             {
                 return NotFound();
             }
 
-            _context.Album.Remove(album);
-            await _context.SaveChangesAsync();
+            _albums.Remove(albumToRemove);
 
             return NoContent();
         }
 
-        private bool AlbumExists(int id)
-        {
-            return (_context.Album?.Any(e => e.IdAlbum == id)).GetValueOrDefault();
-        }
     }
 }

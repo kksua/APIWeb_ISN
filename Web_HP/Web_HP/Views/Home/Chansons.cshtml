@@ -1,121 +1,76 @@
-﻿<!DOCTYPE html>
+﻿@{
+    ViewData["Title"] = "Chansons";
+    var chansons = new List<APIWeb_ISN.Models.Chanson>
+    {
+    new APIWeb_ISN.Models.Chanson { IdChanson = 1, NomChanson = "Blanche nuit", Genre = "jazz", Langue = "chinois", Image = "https://wx4.sinaimg.cn/mw690/008lgPsGgy1hm7ywqg5wij31hc140nca.jpg", Lien = "https://youtu.be/KOa-FlZ3EyI?si=5VqUKZnJYnXzGXr1" },
+        new APIWeb_ISN.Models.Chanson { IdChanson = 2, NomChanson = "God of Music", Genre = "happy", Langue = "coréen", Image = "https://i.scdn.co/image/ab67616d0000b273d07a54abba4f5060c2486e3c", Lien = "https://youtu.be/zSQ48zyWZrY?si=n-VvhGBwkcSTFBAc" },
+       new APIWeb_ISN.Models.Chanson { IdChanson = 3, NomChanson = "Matilda", Genre = "Ballad", Langue = "anglais", Image = "https://t2.genius.com/unsafe/504x504/https%3A%2F%2Fimages.genius.com%2Fd98059a0f2afd10b04b912355c0e8ceb.1000x1000x1.png", Lien = "https://youtu.be/e6MpCYZlBMk" },
+    new APIWeb_ISN.Models.Chanson { IdChanson = 4, NomChanson = "What Was I Made For?", Genre = "Indie", Langue = "", Image = "https://upload.wikimedia.org/wikipedia/en/5/54/Billie_Eilish_-_What_Was_I_Made_For%3F.png", Lien = "https://youtu.be/cW8VLC9nnTo" },
+    new APIWeb_ISN.Models.Chanson { IdChanson = 5, NomChanson = "Unwritten", Genre = "Rhythm and blues", Langue = "anglais", Image = "https://i.scdn.co/image/ab67616d0000b27349e0dac1080e8838054dd025", Lien = "https://youtu.be/b7k0a5hYnSI" }
+
+    };
+    }
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chansons</title>
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f0f0;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
+        /* Add your custom styles here */
+        .chanson-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
             padding: 20px;
         }
 
-        h1 {
+        .chanson-item {
             text-align: center;
-            color: #333;
-        }
-
-        .chanson {
-            display: inline-block;
-            width: calc(33.33% - 20px);
-            margin: 10px;
-            background-color: #fff;
+            border: 1px solid #ccc;
             border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-            .chanson img {
-                width: 100%;
-                height: auto;
-                border-top-left-radius: 5px;
-                border-top-right-radius: 5px;
-            }
-
-            .chanson h2 {
-                padding: 10px;
-                margin: 0;
-                color: #333;
-                font-size: 18px;
-                font-weight: bold;
-            }
-
-        .chanson-info {
             padding: 10px;
         }
 
-            .chanson-info p {
-                margin: 5px 0;
-                font-size: 14px;
-                color: #666;
-            }
+         .acteur-image {
+            max-width: 100%; /* 保持图像宽度自适应容器 */
+            height: auto; /* 自动调整图像高度 */
+            border-radius: 5px;
+        }
 
-            .chanson-info a {
-                text-decoration: none;
-                color: #007bff;
-            }
+        .chanson-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
 
-                .chanson-info a:hover {
-                    text-decoration: underline;
-                }
+        .chanson-name {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .back-btn {
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Chansons</h1>
-        <div id="chansonList"></div>
-    </div>
+        <h1 class="text-center">@ViewData["Title"]</h1>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            fetch('/api/Chanson')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    const chansonList = document.getElementById('chansonList');
-                    data.forEach(chanson => {
-                        const div = document.createElement('div');
-                        div.classList.add('chanson');
-                        const img = document.createElement('img');
-                        img.src = chanson.image;
-                        img.alt = chanson.nomChanson + ' image';
-                        const h2 = document.createElement('h2');
-                        h2.textContent = chanson.nomChanson;
-                        const chansonInfo = document.createElement('div');
-                        chansonInfo.classList.add('chanson-info');
-                        const genre = document.createElement('p');
-                        genre.textContent = 'Genre: ' + chanson.genre;
-                        const langue = document.createElement('p');
-                        langue.textContent = 'Langue: ' + chanson.langue;
-                        const lien = document.createElement('p');
-                        const lienAnchor = document.createElement('a');
-                        lienAnchor.href = chanson.lien;
-                        lienAnchor.textContent = 'Ecouter sur YouTube';
-                        lien.appendChild(lienAnchor);
-                        chansonInfo.appendChild(genre);
-                        chansonInfo.appendChild(langue);
-                        chansonInfo.appendChild(lien);
-                        div.appendChild(img);
-                        div.appendChild(h2);
-                        div.appendChild(chansonInfo);
-                        chansonList.appendChild(div);
-                    });
-                })
-                .catch(error => {
-                    console.error('There was a problem with the fetch operation:', error);
-                });
-        });
-    </script>
+        <a href="/login/home2" class="btn btn-primary back-btn">Retour à la page d'accueil</a>
+        
+        <div class="chanson-grid">
+            @foreach (var chanson in chansons)
+            {
+                <div class="chanson-item">
+                    <img src="@chanson.Image" alt="@chanson.NomChanson" class="chanson-image">
+                    <div class="chanson-name">@chanson.NomChanson</div>
+                </div>
+            }
+        </div>
+    </div>
 </body>
 </html>

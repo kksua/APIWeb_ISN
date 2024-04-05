@@ -1,9 +1,8 @@
 ﻿@{
-    ViewData["Title"] = "Chanteurs";
-    var chanteurs = new List<APIWeb_ISN.Models.Chanteur>
+    ViewData["Title"] = "Directeurs";
+    var directeurs = new List<APIWeb_ISN.Models.Directeurs>
     {
-        new APIWeb_ISN.Models.Chanteur { Nom = "ZHANG Jie", nationaliteChanteur = "Chinois", Image = "https://img1.baidu.com/it/u=244454717,177091370&fm=253&fmt=auto&app=120&f=JPEG?w=500&h=749" },
-        new APIWeb_ISN.Models.Chanteur { Nom = "SEVENTEEN", nationaliteChanteur = "Groupe Coréen", Image = "https://img1.baidu.com/it/u=3382318264,1158349935&fm=253&fmt=auto&app=120&f=JPEG?w=889&h=500" }
+        new APIWeb_ISN.Models.Directeurs { NomDirecteur = "Christopher Nolan", NationaliteDirecteur = "Britannique", ImageDirecteur = "https://ww4.sinaimg.cn/mw690/74489744ly1hmbmyz2vi7j21871uokgf.jpg" }
     };
 }
 
@@ -16,36 +15,34 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <style>
         /* Add your custom styles here */
-        .chanteur-grid {
+        .director-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 20px;
             padding: 20px;
         }
 
-        .chanteur-item {
+        .director-item {
             text-align: center;
             border: 1px solid #ccc;
             border-radius: 5px;
             padding: 10px;
         }
 
-         .acteur-image {
-            max-width: 100%; /* 保持图像宽度自适应容器 */
-            height: auto; /* 自动调整图像高度 */
-            border-radius: 5px;
-        }
-
-
-        .chanteur-image {
+        .director-image {
             max-width: 100%;
             height: auto;
             border-radius: 5px;
         }
 
-        .chanteur-name {
+        .director-name {
             margin-top: 10px;
             font-weight: bold;
+        }
+
+        .director-nationality {
+            margin-top: 5px;
+            color: #777;
         }
 
         .back-btn {
@@ -59,13 +56,13 @@
 
         <a href="/login/home2" class="btn btn-primary back-btn">Retour à la page d'accueil</a>
         
-        <div class="chanteur-grid">
-            @foreach (var chanteur in chanteurs)
+        <div class="director-grid">
+            @foreach (var director in directeurs)
             {
-                <div class="chanteur-item">
-                    <img src="@chanteur.Image" alt="@chanteur.Nom" class="chanteur-image">
-                    <div class="chanteur-name">@chanteur.Nom</div>
-                    <div class="chanteur-nationalite">@chanteur.nationaliteChanteur</div>
+                <div class="director-item">
+                    <img src="@director.ImageDirecteur" alt="@director.NomDirecteur" class="director-image">
+                    <div class="director-name">@director.NomDirecteur</div>
+                    <div class="director-nationality">@director.NationaliteDirecteur</div>
                 </div>
             }
         </div>

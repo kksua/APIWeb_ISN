@@ -1,106 +1,66 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿@{
+    ViewData["Title"] = "Séries";
+    var series = new List<APIWeb_ISN.Models.Series>
+    {
+        new APIWeb_ISN.Models.Series { NomSerie = "Nirvana in Fire", NmbreSeasons = 2, NmbreEpisode = 54 }
+    };
+}
+
+<!DOCTYPE html>
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Series</title>
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f0f0;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
+        /* Ajoutez vos styles personnalisés ici */
+        .serie-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
             padding: 20px;
         }
 
-        h1 {
+        .serie-item {
             text-align: center;
-            color: #333;
-        }
-
-        .series {
-            display: inline-block;
-            width: calc(33.33% - 20px);
-            margin: 10px;
-            background-color: #fff;
+            border: 1px solid #ccc;
             border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-            .series img {
-                width: 100%;
-                height: auto;
-                border-top-left-radius: 5px;
-                border-top-right-radius: 5px;
-            }
-
-            .series h2 {
-                padding: 10px;
-                margin: 0;
-                color: #333;
-                font-size: 18px;
-                font-weight: bold;
-            }
-
-        .series-info {
             padding: 10px;
         }
 
-            .series-info p {
-                margin: 5px 0;
-                font-size: 14px;
-                color: #666;
-            }
+        .serie-name {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .serie-details {
+            margin-top: 10px;
+        }
+
+        .back-btn {
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Series</h1>
-        <div id="seriesList"></div>
-    </div>
+        <h1 class="text-center">@ViewData["Title"]</h1>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            fetch('/api/Series')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    const seriesList = document.getElementById('seriesList');
-                    data.forEach(serie => {
-                        const div = document.createElement('div');
-                        div.classList.add('series');
-                        const img = document.createElement('img');
-                        img.src = serie.image;
-                        img.alt = serie.NomSerie + ' image';
-                        const h2 = document.createElement('h2');
-                        h2.textContent = serie.NomSerie;
-                        const seriesInfo = document.createElement('div');
-                        seriesInfo.classList.add('series-info');
-                        const seasons = document.createElement('p');
-                        seasons.textContent = 'Saisons: ' + serie.NmbreSeasons;
-                        const episodes = document.createElement('p');
-                        episodes.textContent = 'Episodes: ' + serie.NmbreEpisode;
-                        seriesInfo.appendChild(seasons);
-                        seriesInfo.appendChild(episodes);
-                        div.appendChild(img);
-                        div.appendChild(h2);
-                        div.appendChild(seriesInfo);
-                        seriesList.appendChild(div);
-                    });
-                })
-                .catch(error => {
-                    console.error('There was a problem with the fetch operation:', error);
-                });
-        });
-    </script>
+        <a href="/login/home2" class="btn btn-primary back-btn">Retour à la page d'accueil</a>
+        
+        <div class="serie-grid">
+            @foreach (var serie in series)
+            {
+                <div class="serie-item">
+                    <div class="serie-name">@serie.NomSerie</div>
+                    <div class="serie-details">
+                        <p>Saisons: @serie.NmbreSeasons</p>
+                        <p>Épisodes: @serie.NmbreEpisode</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
 </body>
 </html>

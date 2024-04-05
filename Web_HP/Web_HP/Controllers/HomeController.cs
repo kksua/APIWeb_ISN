@@ -54,6 +54,14 @@ namespace Web_HP.Controllers
         {
             return View();
         }
+        public IActionResult Acteurs()
+        {
+            return View();
+        }
+        public IActionResult Directeurs()
+        {
+            return View();
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

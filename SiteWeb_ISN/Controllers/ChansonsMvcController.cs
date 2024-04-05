@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace APIWeb_ISN.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Chanson")]
     [ApiController]
     public class ChansonController : ControllerBase
     {

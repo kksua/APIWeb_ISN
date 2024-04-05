@@ -1,121 +1,79 @@
-﻿<!DOCTYPE html>
+﻿@{
+    ViewData["Title"] = "Films";
+     var films = new List<APIWeb_ISN.Models.Movies>
+    {
+        new APIWeb_ISN.Models.Movies { IdFilm = 1, NomFilm = "Interstellar", Duree = TimeSpan.FromHours(2).Add(TimeSpan.FromMinutes(49)), image = "https://s3.amazonaws.com/nightjarprod/content/uploads/sites/130/2021/08/19085635/gEU2QniE6E77NI6lCU6MxlNBvIx-scaled.jpg", description = "Set in a dystopian future where humanity is embroiled in a catastrophic blight and famine, the film follows a group of astronauts who travel through a wormhole near Saturn in search of a new home for humankind." },
+        new APIWeb_ISN.Models.Movies { IdFilm = 2, NomFilm = "The Boys in the Boat", Duree = TimeSpan.FromHours(2).Add(TimeSpan.FromMinutes(4)), image = "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTPu0jDbb5ltteOnDNLpfnBC6kFGR1Jj4D8YZp-GKlMHsI4mBcn", description = "Au plus fort de la Grande Dépression, les membres de l'équipe d'aviron de l'Université de Washington sont mis sous les projecteurs alors qu'ils concourent pour l'or aux Jeux olympiques de 1936 à Berlin." },
+        new APIWeb_ISN.Models.Movies { IdFilm = 3, NomFilm = "Top Gun: Maverick", Duree = TimeSpan.FromHours(2).Add(TimeSpan.FromMinutes(11)), image = "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTb0I81g39NGDx0sKP5F_DECCsdzoOwh9MVUD0PLSVvQpf3rpIM", description = "Trente années de service amènent Maverick à former un groupe de diplômés d'élite de TOPGUN pour se préparer à une mission de grande envergure pendant que Maverick combat ses démons du passé." }
+    };
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movies</title>
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f0f0;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
+        /* Add your custom styles here */
+        .film-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
             padding: 20px;
         }
 
-        h1 {
+        .film-item {
             text-align: center;
-            color: #333;
-        }
-
-        .movie {
-            display: inline-block;
-            width: calc(33.33% - 20px);
-            margin: 10px;
-            background-color: #fff;
+            border: 1px solid #ccc;
             border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-            .movie img {
-                width: 100%;
-                height: auto;
-                border-top-left-radius: 5px;
-                border-top-right-radius: 5px;
-            }
-
-            .movie h2 {
-                padding: 10px;
-                margin: 0;
-                color: #333;
-                font-size: 18px;
-                font-weight: bold;
-            }
-
-        .movie-info {
             padding: 10px;
         }
+         .acteur-image {
+            max-width: 100%; /* 保持图像宽度自适应容器 */
+            height: auto; /* 自动调整图像高度 */
+            border-radius: 5px;
+        }
 
-            .movie-info p {
-                margin: 5px 0;
-                font-size: 14px;
-                color: #666;
-            }
 
-            .movie-info a {
-                text-decoration: none;
-                color: #007bff;
-            }
+        .film-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
 
-                .movie-info a:hover {
-                    text-decoration: underline;
-                }
+        .film-name {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .film-description {
+            margin-top: 10px;
+        }
+
+        .back-btn {
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Movies</h1>
-        <div id="movieList"></div>
-    </div>
+        <h1 class="text-center">@ViewData["Title"]</h1>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            fetch('/api/Movie')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    const movieList = document.getElementById('movieList');
-                    data.forEach(movie => {
-                        const div = document.createElement('div');
-                        div.classList.add('movie');
-                        const img = document.createElement('img');
-                        img.src = movie.image;
-                        img.alt = movie.NomFilm + ' image';
-                        const h2 = document.createElement('h2');
-                        h2.textContent = movie.NomFilm;
-                        const movieInfo = document.createElement('div');
-                        movieInfo.classList.add('movie-info');
-                        const duree = document.createElement('p');
-                        duree.textContent = 'Durée: ' + movie.Duree;
-                        const description = document.createElement('p');
-                        description.textContent = movie.description;
-                        const lien = document.createElement('p');
-                        const lienAnchor = document.createElement('a');
-                        lienAnchor.href = movie.lien;
-                        lienAnchor.textContent = 'Regarder la bande annonce';
-                        lien.appendChild(lienAnchor);
-                        movieInfo.appendChild(duree);
-                        movieInfo.appendChild(description);
-                        movieInfo.appendChild(lien);
-                        div.appendChild(img);
-                        div.appendChild(h2);
-                        div.appendChild(movieInfo);
-                        movieList.appendChild(div);
-                    });
-                })
-                .catch(error => {
-                    console.error('There was a problem with the fetch operation:', error);
-                });
-        });
-    </script>
+        <a href="/login/home2" class="btn btn-primary back-btn">Retour à la page d'accueil</a>
+        
+        <div class="film-grid">
+            @foreach (var film in films)
+            {
+                <div class="film-item">
+                    <img src="@film.image" alt="@film.NomFilm" class="film-image">
+                    <div class="film-name">@film.NomFilm</div>
+                    <div class="film-duration">@film.Duree</div>
+                    <div class="film-description">@film.description</div>
+                </div>
+            }
+        </div>
+    </div>
 </body>
 </html>

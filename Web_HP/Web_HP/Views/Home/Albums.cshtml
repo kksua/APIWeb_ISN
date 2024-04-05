@@ -1,87 +1,72 @@
-﻿<!DOCTYPE html>
+﻿@{
+    ViewData["Title"] = "Albums";
+    var albums = new List<APIWeb_ISN.Models.Album>
+    {
+        new APIWeb_ISN.Models.Album { IdAlbum = 1, NomAlbum = "WHITE NIGHT", Image = "https://images.app.goo.gl/b9mmb5RELd9yEGno6" },
+        new APIWeb_ISN.Models.Album { IdAlbum = 2, NomAlbum = "SEVENTEEN 11th Mini Album 'SEVENTEENTH HEAVEN'", Image = "https://i.scdn.co/image/ab67616d0000b273d07a54abba4f5060c2486e3c" }
+    };
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Albums</title>
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f0f0;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
+        /* Add your custom styles here */
+        .album-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
             padding: 20px;
         }
 
-        h1 {
+        .album-item {
             text-align: center;
-            color: #333;
-        }
-
-        .album {
-            display: inline-block;
-            width: calc(33.33% - 20px);
-            margin: 10px;
-            background-color: #fff;
+            border: 1px solid #ccc;
             border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        .album img {
-            width: 100%;
-            height: auto;
-            border-top-left-radius: 5px;
-            border-top-right-radius: 5px;
-        }
-
-        .album h2 {
             padding: 10px;
-            margin: 0;
-            color: #333;
-            font-size: 18px;
+        }
+
+         .acteur-image {
+            max-width: 100%; /* 保持图像宽度自适应容器 */
+            height: auto; /* 自动调整图像高度 */
+            border-radius: 5px;
+        }
+
+        .album-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .album-name {
+            margin-top: 10px;
             font-weight: bold;
+        }
+
+        .back-btn {
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Albums</h1>
-        <div id="albumList"></div>
-    </div>
+        <h1 class="text-center">@ViewData["Title"]</h1>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            fetch('/api/Album')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    const albumList = document.getElementById('albumList');
-                    data.forEach(album => {
-                        const div = document.createElement('div');
-                        div.classList.add('album');
-                        const img = document.createElement('img');
-                        img.src = album.image;
-                        img.alt = album.nomAlbum + ' image';
-                        const h2 = document.createElement('h2');
-                        h2.textContent = album.nomAlbum;
-                        div.appendChild(img);
-                        div.appendChild(h2);
-                        albumList.appendChild(div);
-                    });
-                })
-                .catch(error => {
-                    console.error('There was a problem with the fetch operation:', error);
-                });
-        });
-    </script>
+        <a href="/login/home2" class="btn btn-primary back-btn">Retour à la page d'accueil</a>
+        
+        <div class="album-grid">
+            @foreach (var album in albums)
+            {
+                <div class="album-item">
+                    <img src="@album.Image" alt="@album.NomAlbum" class="album-image">
+                    <div class="album-name">@album.NomAlbum</div>
+                </div>
+            }
+        </div>
+    </div>
 </body>
 </html>
